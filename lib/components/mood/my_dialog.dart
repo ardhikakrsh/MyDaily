@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mydaily/widgets/main_icon_button.dart';
 import 'package:mydaily/widgets/navigation_menu.dart';
 
 class MyDialog extends StatelessWidget {
@@ -23,7 +24,7 @@ class MyDialog extends StatelessWidget {
                   TextSpan(
                     text: "You're on a",
                     style: GoogleFonts.rubik(
-                      fontSize: 20,
+                      fontSize: 18,
                       fontWeight: FontWeight.w500,
                       color: Colors.black,
                     ),
@@ -31,7 +32,7 @@ class MyDialog extends StatelessWidget {
                   TextSpan(
                     text: ' good way!',
                     style: GoogleFonts.rubik(
-                      fontSize: 20,
+                      fontSize: 18,
                       color: Color(0xFF8B4CFC),
                       fontWeight: FontWeight.w500,
                     ),
@@ -39,41 +40,33 @@ class MyDialog extends StatelessWidget {
                 ],
               ),
             ),
-            Center(
-              child: Text(
-                "Your day is going",
-                style: GoogleFonts.rubik(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.black,
-                ),
+            Text(
+              "Your day is going",
+              style: GoogleFonts.rubik(
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+                color: Colors.black,
               ),
             ),
-            Center(
-              child: Text(
-                ' amazing',
-                style: GoogleFonts.rubik(
-                  fontSize: 20,
-                  color: Color(0xFF8B4CFC),
-                  fontWeight: FontWeight.w500,
-                ),
+            Text(
+              ' amazing',
+              style: GoogleFonts.rubik(
+                fontSize: 18,
+                color: Color(0xFF8B4CFC),
+                fontWeight: FontWeight.w500,
               ),
             ),
             const SizedBox(height: 10),
-            Center(
-              child: Text(
-                'Keep tracking your mood to know how to',
-                style: GoogleFonts.rubik(color: Colors.grey[600]),
-              ),
+            Text(
+              'Keep tracking your mood to know how to improve your mental health.',
+              textAlign: TextAlign.center,
+              style: GoogleFonts.rubik(color: Colors.grey[600], fontSize: 12),
             ),
-            Center(
-              child: Text(
-                ' improve your mental health.',
-                style: GoogleFonts.rubik(color: Colors.grey[600]),
-              ),
-            ),
+
             const SizedBox(height: 20),
-            ElevatedButton(
+            MainIconButton(
+              icon: Icons.check,
+              title: 'Got it',
               onPressed: () {
                 Navigator.push(
                   context,
@@ -82,7 +75,6 @@ class MyDialog extends StatelessWidget {
                   ),
                 );
               },
-              child: const Text('Got it'),
             ),
           ],
         ),

@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mydaily/widgets/main_background.dart';
-import 'package:mydaily/pages/home/home_page.dart';
+import 'package:mydaily/widgets/navigation_menu.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
@@ -13,12 +13,6 @@ class WelcomePage extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          // Image.asset(
-          //   'assets/images/background2.png',
-          //   fit: BoxFit.cover,
-          //   width: double.infinity,
-          //   height: double.infinity,
-          // ),
           MainBackground(),
           Column(
             children: [
@@ -29,7 +23,7 @@ class WelcomePage extends StatelessWidget {
                     Text(
                       'Welcome to MyDaily',
                       style: GoogleFonts.rubik(
-                        fontSize: 32,
+                        fontSize: 28,
                         fontWeight: FontWeight.bold,
                         color: Color(0xFF333333),
                       ),
@@ -69,7 +63,9 @@ class WelcomePage extends StatelessWidget {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => HomePage()),
+                            MaterialPageRoute(
+                              builder: (context) => NavigationMenu(),
+                            ),
                           );
                         },
                         child: Text(
