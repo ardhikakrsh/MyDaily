@@ -15,21 +15,25 @@ class MainIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton.icon(
         onPressed: onPressed,
-        icon: Icon(icon, color: Colors.white),
+        icon: Icon(icon, color: isDarkMode ? Colors.black : Colors.white),
         label: Text(
           title,
           style: GoogleFonts.rubik(
             fontSize: 14,
             fontWeight: FontWeight.w500,
-            color: Colors.white,
+            color: isDarkMode ? Colors.black : Colors.white,
           ),
         ),
         style: ElevatedButton.styleFrom(
-          backgroundColor: Color(0xFF8B4CFC),
+          backgroundColor: isDarkMode ? Color(0xFFB2A5FF) : Color(0xFF8B4CFC),
+          shadowColor: isDarkMode
+              ? Color(0xFFB2A5FF).withOpacity(0.6)
+              : Color(0xFF8B4CFC).withOpacity(0.6),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),
@@ -37,7 +41,7 @@ class MainIconButton extends StatelessWidget {
           textStyle: GoogleFonts.rubik(
             fontSize: 14,
             fontWeight: FontWeight.w500,
-            color: Colors.white,
+            color: isDarkMode ? Colors.black : Colors.white,
           ),
         ),
       ),

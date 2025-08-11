@@ -24,6 +24,7 @@ class _NavigationMenuState extends State<NavigationMenu> {
   ];
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       body: _pages[_currentIndex],
       extendBody: true,
@@ -32,10 +33,14 @@ class _NavigationMenuState extends State<NavigationMenu> {
         child: CrystalNavigationBar(
           currentIndex: _currentIndex,
           enablePaddingAnimation: true,
-          indicatorColor: Color(0xFF8B4CFC),
-          unselectedItemColor: Color(0xFF8B4CFC).withOpacity(0.5),
+          indicatorColor: isDarkMode ? Color(0xFFB2A5FF) : Color(0xFF8B4CFC),
+          unselectedItemColor: isDarkMode
+              ? Color(0xFFB2A5FF).withOpacity(0.6)
+              : Color(0xFF8B4CFC).withOpacity(0.5),
           backgroundColor: Color(0xFFDED7FA).withOpacity(0.1),
-          outlineBorderColor: Color(0xFF8B4CFC).withOpacity(0.1),
+          outlineBorderColor: isDarkMode
+              ? Color(0xFFB2A5FF).withOpacity(0.6)
+              : Color(0xFF8B4CFC).withOpacity(0.5),
           borderWidth: 2,
           onTap: _handleIndexChanged,
           items: [
@@ -43,8 +48,9 @@ class _NavigationMenuState extends State<NavigationMenu> {
             CrystalNavigationBarItem(
               icon: IconlyBold.home,
               unselectedIcon: IconlyLight.home,
-              selectedColor: Color(0xFF8B4CFC),
+              selectedColor: isDarkMode ? Color(0xFFB2A5FF) : Color(0xFF8B4CFC),
               badge: const Badge(
+                backgroundColor: Colors.red,
                 label: Text("9+", style: TextStyle(color: Colors.white)),
               ),
             ),
@@ -53,21 +59,21 @@ class _NavigationMenuState extends State<NavigationMenu> {
             CrystalNavigationBarItem(
               icon: IconlyBold.chart,
               unselectedIcon: IconlyLight.chart,
-              selectedColor: Color(0xFF8B4CFC),
+              selectedColor: isDarkMode ? Color(0xFFB2A5FF) : Color(0xFF8B4CFC),
             ),
 
             // History
             CrystalNavigationBarItem(
               icon: IconlyBold.bookmark,
               unselectedIcon: IconlyLight.bookmark,
-              selectedColor: Color(0xFF8B4CFC),
+              selectedColor: isDarkMode ? Color(0xFFB2A5FF) : Color(0xFF8B4CFC),
             ),
 
             /// Settings
             CrystalNavigationBarItem(
               icon: IconlyBold.setting,
               unselectedIcon: IconlyLight.setting,
-              selectedColor: Color(0xFF8B4CFC),
+              selectedColor: isDarkMode ? Color(0xFFB2A5FF) : Color(0xFF8B4CFC),
             ),
           ],
         ),

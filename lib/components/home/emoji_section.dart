@@ -9,6 +9,7 @@ class EmojiSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -17,7 +18,9 @@ class EmojiSection extends StatelessWidget {
           style: GoogleFonts.rubik(
             fontSize: 20,
             fontWeight: FontWeight.bold,
-            color: Colors.black.withOpacity(0.7),
+            color: isDarkMode
+                ? Colors.white.withOpacity(0.7)
+                : Colors.black.withOpacity(0.7),
           ),
         ),
         SizedBox(height: 25),

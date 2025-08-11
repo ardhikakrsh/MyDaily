@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:mydaily/data/notifiers.dart';
 import 'package:mydaily/models/mood_entry.dart';
 import 'package:mydaily/pages/welcome_page.dart';
+import 'package:mydaily/theme/dark_theme.dart';
+import 'package:mydaily/theme/light_theme.dart';
 
 void main() async {
   // init hive
@@ -22,13 +24,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        textTheme: GoogleFonts.robotoTextTheme(Theme.of(context).textTheme),
-      ),
-      debugShowCheckedModeBanner: false,
-      title: 'MyDaily',
-      home: const WelcomePage(),
+    return ValueListenableBuilder(
+      valueListenable: isDarkModeNotifier,
+      builder: (context, isDarkMode, child) {
+        return MaterialApp(
+          theme: isDarkMode ? lightTheme : darkTheme,
+          debugShowCheckedModeBanner: false,
+          title: 'MyDaily',
+          home: const WelcomePage(),
+        );
+      },
     );
   }
 }
