@@ -9,9 +9,10 @@ class SecondaryBackground extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            Color(0xFFEBE8F2).withOpacity(0.6),
+            Color(0xFFE5DFFB),
+            Color(0xFFDBE8EF),
             Color(0xFFE8E2EB),
-            // Color(0xFFF2E2E2),
+            Color(0xFFF2E2E2),
             Color(0xFFFAF8F7),
           ],
           begin: Alignment.topLeft,
