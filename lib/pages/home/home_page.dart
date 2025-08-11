@@ -125,179 +125,193 @@ class _HomePageState extends State<HomePage> {
                                 todayEntries[index].mood,
                               );
                               return Card(
-                                color: Colors.white,
+                                color: isDarkMode
+                                    ? Color(0xFF1E1E2E)
+                                    : Colors.white,
                                 margin: EdgeInsets.symmetric(vertical: 8),
-                                child: Container(
-                                  width: double.infinity,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(30),
-                                    color: Colors.white,
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(16.0),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Image.asset(
-                                              emoticon.imagePath,
-                                              height: 50,
-                                              width: 50,
-                                            ),
-                                            SizedBox(width: 4),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Image.asset(
+                                            emoticon.imagePath,
+                                            height: 50,
+                                            width: 50,
+                                          ),
+                                          SizedBox(width: 4),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                todayEntries[index].mood,
+                                                style: GoogleFonts.rubik(
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: isDarkMode
+                                                      ? Colors.white
+                                                      : Colors.black,
+                                                ),
+                                              ),
+                                              Text(
+                                                DateFormat(
+                                                  'd MMMM, yyyy',
+                                                ).format(
+                                                  todayEntries[index].createdAt,
+                                                ),
+                                                style: TextStyle(
+                                                  color: isDarkMode
+                                                      ? Colors.white
+                                                            .withOpacity(0.8)
+                                                      : Colors.black
+                                                            .withOpacity(0.4),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          const Spacer(),
+                                          Row(
+                                            children: [
+                                              GestureDetector(
+                                                onTap: () {
+                                                  _deleteEntry(entry);
+                                                },
+                                                child: Text(
+                                                  'Delete',
+                                                  style: GoogleFonts.rubik(
+                                                    color: Colors.redAccent,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(width: 8),
+                                              Container(
+                                                height: 14,
+                                                width: 2,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(30),
+                                                  color: isDarkMode
+                                                      ? Colors.white
+                                                            .withOpacity(0.6)
+                                                      : Colors.black
+                                                            .withOpacity(0.4),
+                                                ),
+                                              ),
+                                              const SizedBox(width: 8),
+                                              GestureDetector(
+                                                onTap: () {
+                                                  print('edit');
+                                                },
+                                                child: Text(
+                                                  'Edit',
+                                                  style: GoogleFonts.rubik(
+                                                    color: Color(0xFF8B4CFC),
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(height: 16),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text.rich(
+                                            TextSpan(
                                               children: [
-                                                Text(
-                                                  todayEntries[index].mood,
+                                                TextSpan(
+                                                  text: 'You felt ',
                                                   style: GoogleFonts.rubik(
                                                     fontSize: 14,
-                                                    fontWeight: FontWeight.bold,
+                                                    color: isDarkMode
+                                                        ? Colors.white
+                                                              .withOpacity(0.8)
+                                                        : Colors.black
+                                                              .withOpacity(0.6),
                                                   ),
                                                 ),
-                                                Text(
-                                                  DateFormat(
-                                                    'd MMMM, yyyy',
-                                                  ).format(
-                                                    todayEntries[index]
-                                                        .createdAt,
-                                                  ),
-                                                  style: TextStyle(
-                                                    color: Colors.black
-                                                        .withOpacity(0.4),
+                                                TextSpan(
+                                                  text: todayEntries[index]
+                                                      .feeling,
+                                                  style: GoogleFonts.rubik(
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.w500,
+                                                    color: isDarkMode
+                                                        ? Colors.white
+                                                        : Colors.black,
                                                   ),
                                                 ),
                                               ],
                                             ),
-                                            const Spacer(),
-                                            Row(
+                                          ),
+                                          Text.rich(
+                                            TextSpan(
                                               children: [
-                                                GestureDetector(
-                                                  onTap: () {
-                                                    _deleteEntry(entry);
-                                                  },
-                                                  child: Text(
-                                                    'Delete',
-                                                    style: GoogleFonts.rubik(
-                                                      color: Colors.redAccent,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                    ),
+                                                TextSpan(
+                                                  text: 'Because of ',
+                                                  style: GoogleFonts.rubik(
+                                                    fontSize: 14,
+                                                    color: isDarkMode
+                                                        ? Colors.white
+                                                              .withOpacity(0.8)
+                                                        : Colors.black
+                                                              .withOpacity(0.6),
                                                   ),
                                                 ),
-                                                const SizedBox(width: 8),
-                                                Container(
-                                                  height: 14,
-                                                  width: 2,
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                          30,
-                                                        ),
-                                                    color: Colors.black
-                                                        .withOpacity(0.4),
-                                                  ),
-                                                ),
-                                                const SizedBox(width: 8),
-                                                GestureDetector(
-                                                  onTap: () {
-                                                    print('edit');
-                                                  },
-                                                  child: Text(
-                                                    'Edit',
-                                                    style: GoogleFonts.rubik(
-                                                      color: Color(0xFF8B4CFC),
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                    ),
+                                                TextSpan(
+                                                  text: todayEntries[index]
+                                                      .reasonActivity,
+                                                  style: GoogleFonts.rubik(
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.w500,
+                                                    color: isDarkMode
+                                                        ? Colors.white
+                                                        : Colors.black,
                                                   ),
                                                 ),
                                               ],
                                             ),
-                                          ],
-                                        ),
-                                        SizedBox(height: 16),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text.rich(
-                                              TextSpan(
-                                                children: [
-                                                  TextSpan(
-                                                    text: 'You felt ',
-                                                    style: GoogleFonts.rubik(
-                                                      fontSize: 14,
-                                                      color: Colors.black
-                                                          .withOpacity(0.6),
-                                                    ),
+                                          ),
+                                          SizedBox(height: 10),
+                                          Text.rich(
+                                            TextSpan(
+                                              children: [
+                                                TextSpan(
+                                                  text: 'Note:',
+                                                  style: GoogleFonts.rubik(
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.w500,
+                                                    color: isDarkMode
+                                                        ? Colors.white
+                                                        : Colors.black,
                                                   ),
-                                                  TextSpan(
-                                                    text: todayEntries[index]
-                                                        .feeling,
-                                                    style: GoogleFonts.rubik(
-                                                      fontSize: 14,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                    ),
+                                                ),
+                                                TextSpan(
+                                                  text:
+                                                      ' ${todayEntries[index].note}',
+                                                  style: GoogleFonts.rubik(
+                                                    fontSize: 14,
+                                                    color: isDarkMode
+                                                        ? Colors.white
+                                                              .withOpacity(0.8)
+                                                        : Colors.black
+                                                              .withOpacity(0.6),
                                                   ),
-                                                ],
-                                              ),
+                                                ),
+                                              ],
                                             ),
-                                            Text.rich(
-                                              TextSpan(
-                                                children: [
-                                                  TextSpan(
-                                                    text: 'Because of ',
-                                                    style: GoogleFonts.rubik(
-                                                      fontSize: 14,
-                                                      color: Colors.black
-                                                          .withOpacity(0.6),
-                                                    ),
-                                                  ),
-                                                  TextSpan(
-                                                    text: todayEntries[index]
-                                                        .reasonActivity,
-                                                    style: GoogleFonts.rubik(
-                                                      fontSize: 14,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            SizedBox(height: 10),
-                                            Text.rich(
-                                              TextSpan(
-                                                children: [
-                                                  TextSpan(
-                                                    text: 'Note:',
-                                                    style: GoogleFonts.rubik(
-                                                      fontSize: 14,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                    ),
-                                                  ),
-                                                  TextSpan(
-                                                    text:
-                                                        ' ${todayEntries[index].note}',
-                                                    style: GoogleFonts.rubik(
-                                                      fontSize: 14,
-                                                      color: Colors.black
-                                                          .withOpacity(0.6),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
                                   ),
                                 ),
                               );
