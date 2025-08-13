@@ -8,7 +8,11 @@ class MyDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Dialog(
+      backgroundColor: isDarkMode
+          ? const Color.fromARGB(255, 53, 21, 112)
+          : Colors.white,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -26,14 +30,14 @@ class MyDialog extends StatelessWidget {
                     style: GoogleFonts.rubik(
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
-                      color: Colors.black,
+                      color: isDarkMode ? Colors.white : Colors.black,
                     ),
                   ),
                   TextSpan(
                     text: ' good way!',
                     style: GoogleFonts.rubik(
                       fontSize: 18,
-                      color: Color(0xFF8B4CFC),
+                      color: isDarkMode ? Color(0xFFB2A5FF) : Color(0xFF8B4CFC),
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -45,14 +49,14 @@ class MyDialog extends StatelessWidget {
               style: GoogleFonts.rubik(
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
-                color: Colors.black,
+                color: isDarkMode ? Colors.white : Colors.black,
               ),
             ),
             Text(
               ' amazing',
               style: GoogleFonts.rubik(
                 fontSize: 18,
-                color: Color(0xFF8B4CFC),
+                color: isDarkMode ? Color(0xFFB2A5FF) : Color(0xFF8B4CFC),
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -60,7 +64,10 @@ class MyDialog extends StatelessWidget {
             Text(
               'Keep tracking your mood to know how to improve your mental health.',
               textAlign: TextAlign.center,
-              style: GoogleFonts.rubik(color: Colors.grey[600], fontSize: 12),
+              style: GoogleFonts.rubik(
+                color: isDarkMode ? Colors.grey[400] : Colors.grey[600],
+                fontSize: 12,
+              ),
             ),
 
             const SizedBox(height: 20),

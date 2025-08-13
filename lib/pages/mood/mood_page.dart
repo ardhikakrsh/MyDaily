@@ -117,70 +117,90 @@ class _MoodPageState extends State<MoodPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(30),
-        gradient: LinearGradient(
-          colors: [
-            Color(0xFFE7F0F3),
-            Color(0xFFDBE8EF),
-            Color(0xFFD8DEF6),
-            Color(0xFFE5E2F4),
-            Color(0xFFF8F9FE),
-          ],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-        ),
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    return Padding(
+      padding: EdgeInsets.only(
+        bottom: MediaQuery.of(context).viewInsets.bottom,
       ),
-      height: MediaQuery.of(context).size.height * 0.85,
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-      child: Column(
-        children: [
-          _buildHeader(),
-          const SizedBox(height: 16),
-          Expanded(
-            child: PageView(
-              controller: _pageController,
-              physics: const NeverScrollableScrollPhysics(),
-              onPageChanged: (index) {
-                setState(() {
-                  _currentPageIndex = index;
-                });
-              },
-              children: [
-                _buildDatePickerPage(),
-                _buildMoodSelectionPage(),
-                _buildTextFieldPage(
-                  question: 'What did you feel?',
-                  description:
-                      'After selecting your mood that reflects how you felt, please describe it in more detail.',
-                  controller: _feelingController,
-                  hint: 'e.g., Disappointed',
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(30),
+
+          gradient: isDarkMode
+              ? const LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Color(0xFF1E2A38), // biru gelap dominan
+                    Color(0xFF2C3E50), // biru keabu gelap
+                    Color(0xFF4B4376), // ungu gelap tipis sebagai aksen
+                    Color(0xFF121212), // hitam pekat
+                  ],
+                )
+              : LinearGradient(
+                  colors: [
+                    Color(0xFFE7F0F3),
+                    Color(0xFFDBE8EF),
+                    Color(0xFFD8DEF6),
+                    Color(0xFFE5E2F4),
+                    Color(0xFFF8F9FE),
+                  ],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
                 ),
-                _buildTextFieldPage(
-                  question:
-                      'What was the reason or activity that led to this mood?',
-                  description: 'Please describe the reason or activity',
-                  controller: _reasonActivityController,
-                  hint: 'e.g., Work',
-                ),
-                _buildTextFieldPage(
-                  question: 'Your Note',
-                  description:
-                      'If you have any additional notes or thoughts about your mood today, please write them here.',
-                  controller: _noteController,
-                  hint: 'Tell me more...',
-                  maxLines: 4,
-                ),
-              ],
+        ),
+        height: MediaQuery.of(context).size.height * 0.85,
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+        child: Column(
+          children: [
+            _buildHeader(),
+            const SizedBox(height: 16),
+            Expanded(
+              child: PageView(
+                controller: _pageController,
+                physics: const NeverScrollableScrollPhysics(),
+                onPageChanged: (index) {
+                  setState(() {
+                    _currentPageIndex = index;
+                  });
+                },
+                children: [
+                  _buildDatePickerPage(),
+                  _buildMoodSelectionPage(),
+                  _buildTextFieldPage(
+                    question: 'What did you feel?',
+                    description:
+                        'After selecting your mood that reflects how you felt, please describe it in more detail.',
+                    controller: _feelingController,
+                    hint: 'e.g., Disappointed',
+                  ),
+                  _buildTextFieldPage(
+                    question:
+                        'What was the reason or activity that led to this mood?',
+                    description: 'Please describe the reason or activity',
+                    controller: _reasonActivityController,
+                    hint: 'e.g., Work',
+                  ),
+                  _buildTextFieldPage(
+                    question: "Let's write about it",
+                    description:
+                        'If you have any additional notes or thoughts about your mood today, please write them here.',
+                    controller: _noteController,
+                    hint:
+                        'How is your day going? How has it changed your mood?',
+                    maxLines: 4,
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 
   Widget _buildHeader() {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -188,18 +208,28 @@ class _MoodPageState extends State<MoodPage> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            IconButton(
-              icon: const Icon(Icons.arrow_back, color: Colors.black),
-              onPressed: () {
-                if (_currentPageIndex > 0) {
-                  _pageController.previousPage(
-                    duration: const Duration(milliseconds: 300),
-                    curve: Curves.easeIn,
-                  );
-                } else {
-                  Navigator.pop(context);
-                }
-              },
+            Container(
+              width: 40,
+              height: 40,
+              decoration: BoxDecoration(
+                color: isDarkMode
+                    ? Colors.white.withOpacity(0.4)
+                    : Colors.white,
+                borderRadius: BorderRadius.circular(30),
+              ),
+              child: IconButton(
+                icon: Icon(Icons.arrow_back, color: Colors.black),
+                onPressed: () {
+                  if (_currentPageIndex > 0) {
+                    _pageController.previousPage(
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeIn,
+                    );
+                  } else {
+                    Navigator.pop(context);
+                  }
+                },
+              ),
             ),
             Container(
               width: 60,
@@ -209,11 +239,24 @@ class _MoodPageState extends State<MoodPage> {
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
-            SizedBox(
+            Container(
               width: 40,
               height: 40,
+              decoration: BoxDecoration(
+                color: isDarkMode
+                    ? Colors.white.withOpacity(0.4)
+                    : Colors.white,
+                borderRadius: BorderRadius.circular(30),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.2),
+                    spreadRadius: 1,
+                    blurRadius: 5,
+                  ),
+                ],
+              ),
               child: IconButton(
-                icon: const Icon(Icons.close, color: Colors.black),
+                icon: Icon(Icons.close, color: Colors.black),
                 onPressed: () => Navigator.pop(context),
               ),
             ),
@@ -225,7 +268,7 @@ class _MoodPageState extends State<MoodPage> {
           '${_currentPageIndex + 1}/$_totalPages',
           style: GoogleFonts.rubik(
             fontWeight: FontWeight.bold,
-            color: Colors.black,
+            color: isDarkMode ? Colors.white : Colors.black,
           ),
         ),
       ],
@@ -233,6 +276,7 @@ class _MoodPageState extends State<MoodPage> {
   }
 
   Widget _buildDatePickerPage() {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Column(
@@ -242,11 +286,11 @@ class _MoodPageState extends State<MoodPage> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: isDarkMode ? Color(0xFF1E1E2E) : Colors.white,
               borderRadius: BorderRadius.circular(12),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.grey.withOpacity(0.1),
+                  color: isDarkMode ? Color(0xFFB2A5FF) : Color(0xFF8B4CFC),
                   spreadRadius: 1,
                   blurRadius: 5,
                 ),
@@ -260,7 +304,9 @@ class _MoodPageState extends State<MoodPage> {
                   children: [
                     Text(
                       'Selected Date & Time',
-                      style: GoogleFonts.rubik(color: Colors.grey[600]),
+                      style: GoogleFonts.rubik(
+                        color: isDarkMode ? Colors.white : Colors.grey[600],
+                      ),
                     ),
                     const SizedBox(height: 4),
                     Text(
@@ -275,9 +321,9 @@ class _MoodPageState extends State<MoodPage> {
                 ),
                 // Tombol untuk mengubah waktu
                 IconButton(
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.edit_calendar_outlined,
-                    color: Color(0xFF8B4CFC),
+                    color: isDarkMode ? Color(0xFFB2A5FF) : Color(0xFF8B4CFC),
                   ),
                   onPressed: () => _selectTime(context),
                 ),
@@ -301,29 +347,30 @@ class _MoodPageState extends State<MoodPage> {
   }
 
   Widget _buildMoodSelectionPage() {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Column(
             children: [
               Text(
                 'What is your mood today?',
+                textAlign: TextAlign.center,
                 style: GoogleFonts.rubik(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
+                  color: isDarkMode ? Colors.white : Colors.black,
                 ),
               ),
               const SizedBox(height: 10),
               Text(
-                'Select an emoticon that reflects the most how',
-                style: GoogleFonts.rubik(color: Colors.grey[600]),
-              ),
-              Text(
-                'you are feeling at this moment.',
-                style: GoogleFonts.rubik(color: Colors.grey[600]),
+                'Select an emoticon that reflects the most how you are feeling at this moment.',
+                textAlign: TextAlign.center,
+                style: GoogleFonts.rubik(
+                  color: isDarkMode ? Colors.grey[400] : Colors.grey[600],
+                ),
               ),
             ],
           ),
@@ -371,6 +418,7 @@ class _MoodPageState extends State<MoodPage> {
     required String hint,
     int maxLines = 1,
   }) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Column(
@@ -381,15 +429,20 @@ class _MoodPageState extends State<MoodPage> {
             children: [
               Text(
                 question,
+                textAlign: TextAlign.center,
                 style: GoogleFonts.rubik(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
+                  color: isDarkMode ? Colors.white : Colors.black,
                 ),
               ),
               const SizedBox(height: 10),
               Text(
                 description,
-                style: GoogleFonts.rubik(color: Colors.grey[600]),
+                textAlign: TextAlign.center,
+                style: GoogleFonts.rubik(
+                  color: isDarkMode ? Colors.grey[400] : Colors.grey[600],
+                ),
               ),
             ],
           ),
@@ -403,7 +456,7 @@ class _MoodPageState extends State<MoodPage> {
                 borderRadius: BorderRadius.circular(16),
               ),
               filled: true,
-              fillColor: Colors.white,
+              fillColor: isDarkMode ? Colors.grey[800] : Colors.white,
             ),
             autofocus: true,
           ),

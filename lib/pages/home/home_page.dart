@@ -19,10 +19,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  void _deleteEntry(MoodEntry entry) {
-    entry.delete();
-  }
-
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
@@ -120,7 +116,6 @@ class _HomePageState extends State<HomePage> {
                             shrinkWrap: true,
                             physics: NeverScrollableScrollPhysics(),
                             itemBuilder: (context, index) {
-                              final entry = todayEntries[index];
                               final emoticon = getEmoticonForMood(
                                 todayEntries[index].mood,
                               );
@@ -174,49 +169,6 @@ class _HomePageState extends State<HomePage> {
                                             ],
                                           ),
                                           const Spacer(),
-                                          Row(
-                                            children: [
-                                              GestureDetector(
-                                                onTap: () {
-                                                  _deleteEntry(entry);
-                                                },
-                                                child: Text(
-                                                  'Delete',
-                                                  style: GoogleFonts.rubik(
-                                                    color: Colors.redAccent,
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
-                                                ),
-                                              ),
-                                              const SizedBox(width: 8),
-                                              Container(
-                                                height: 14,
-                                                width: 2,
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(30),
-                                                  color: isDarkMode
-                                                      ? Colors.white
-                                                            .withOpacity(0.6)
-                                                      : Colors.black
-                                                            .withOpacity(0.4),
-                                                ),
-                                              ),
-                                              const SizedBox(width: 8),
-                                              GestureDetector(
-                                                onTap: () {
-                                                  print('edit');
-                                                },
-                                                child: Text(
-                                                  'Edit',
-                                                  style: GoogleFonts.rubik(
-                                                    color: Color(0xFF8B4CFC),
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
                                         ],
                                       ),
                                       SizedBox(height: 16),

@@ -27,10 +27,15 @@ class EmoticonMessage extends StatelessWidget {
               style: GoogleFonts.rubik(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
+                color: Colors.black,
               ),
             ),
             SizedBox(height: 10),
-            Text(message, textAlign: TextAlign.center),
+            Text(
+              message,
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.black),
+            ),
           ],
         ),
       ),

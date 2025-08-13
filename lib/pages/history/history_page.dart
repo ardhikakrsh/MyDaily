@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:mydaily/pages/history/edit_mood.dart';
 import 'package:mydaily/helpers/emoticon_helper.dart';
 import 'package:mydaily/models/mood_entry.dart';
 import 'package:mydaily/widgets/dark_secondary_background.dart';
@@ -16,6 +17,7 @@ class HistoryPage extends StatefulWidget {
 
 class _HistoryPageState extends State<HistoryPage> {
   DateTime? _selectedDate;
+  DateTime? editDate;
 
   bool isSameDay(DateTime date1, DateTime date2) {
     return date1.year == date2.year &&
@@ -39,6 +41,37 @@ class _HistoryPageState extends State<HistoryPage> {
 
   void _deleteEntry(MoodEntry entry) {
     entry.delete();
+  }
+
+  void _editEntry(MoodEntry entry) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        final TextEditingController emoticonController = TextEditingController(
+          text: entry.mood,
+        );
+        final TextEditingController feelingController = TextEditingController(
+          text: entry.feeling,
+        );
+        final TextEditingController reasonController = TextEditingController(
+          text: entry.reasonActivity,
+        );
+        final TextEditingController noteController = TextEditingController(
+          text: entry.note,
+        );
+        final dateController = TextEditingController(
+          text: DateFormat('d MMMM, yyyy').format(entry.createdAt),
+        );
+        return EditMood(
+          entry: entry,
+          dateController: dateController,
+          emoticonController: emoticonController,
+          feelingController: feelingController,
+          reasonController: reasonController,
+          noteController: noteController,
+        );
+      },
+    );
   }
 
   @override
@@ -266,12 +299,14 @@ class _HistoryPageState extends State<HistoryPage> {
                                               const SizedBox(width: 8),
                                               GestureDetector(
                                                 onTap: () {
-                                                  print('edit');
+                                                  _editEntry(entry);
                                                 },
                                                 child: Text(
                                                   'Edit',
                                                   style: GoogleFonts.rubik(
-                                                    color: Color(0xFF8B4CFC),
+                                                    color: isDarkMode
+                                                        ? Color(0xFFB2A5FF)
+                                                        : Color(0xFF8B4CFC),
                                                     fontWeight: FontWeight.w500,
                                                   ),
                                                 ),
