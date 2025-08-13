@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
 import 'package:mydaily/pages/history/history_page.dart';
 import 'package:mydaily/pages/home/home_page.dart';
-import 'package:mydaily/pages/sett/settings_page.dart';
+import 'package:mydaily/pages/setting/settings_page.dart';
 import 'package:mydaily/pages/statistic/statistic_page.dart';
 
 class NavigationMenu extends StatefulWidget {
