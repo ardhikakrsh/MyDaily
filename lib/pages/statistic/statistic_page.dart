@@ -2,6 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:mydaily/components/statistic/bottom_titles.dart';
 import 'package:mydaily/components/statistic/filtered_toogle_button.dart';
 import 'package:mydaily/data/list_emoticon.dart';
@@ -45,7 +46,11 @@ class _StatisticPageState extends State<StatisticPage> {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'Your mood patterns over the last 7 days',
+                    'Your mood paterns from:\n${_selectedRange == TimeRange.weekly
+                        ? "${DateFormat('d MMM, yyyy').format(DateTime.now().subtract(const Duration(days: 7)))} - ${DateFormat('d MMM, yyyy').format(DateTime.now())}"
+                        : _selectedRange == TimeRange.monthly
+                        ? "${DateFormat('d MMM, yyyy').format(DateTime.now().subtract(const Duration(days: 30)))} - ${DateFormat('d MMM, yyyy').format(DateTime.now())}"
+                        : "Semua waktu"}',
                     style: GoogleFonts.rubik(
                       fontSize: 16,
                       color: isDarkMode ? Colors.white : Colors.grey[700],
@@ -63,7 +68,7 @@ class _StatisticPageState extends State<StatisticPage> {
                   const SizedBox(height: 20),
                   Container(
                     decoration: BoxDecoration(
-                      color: isDarkMode ? Colors.grey[800] : Color(0xFFE5DFFB),
+                      color: isDarkMode ? Color(0xFF2C2A3A) : Color(0xFFE5DFFB),
                       borderRadius: BorderRadius.circular(16),
                       boxShadow: [
                         BoxShadow(
