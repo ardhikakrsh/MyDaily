@@ -8,7 +8,10 @@ class MainBackground extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [Color(0xFFBACFFF).withOpacity(0.6), Color(0xFFFFCEB7)],
+          colors: [
+            Color.fromARGB(255, 134, 139, 151).withOpacity(0.6),
+            Color(0xFFFFCEB7),
+          ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),

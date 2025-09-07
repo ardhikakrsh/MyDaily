@@ -3,8 +3,8 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mydaily/data/notifiers.dart';
 import 'package:mydaily/models/mood_entry.dart';
 import 'package:mydaily/pages/welcome_page.dart';
-import 'package:mydaily/theme/dark_theme.dart';
-import 'package:mydaily/theme/light_theme.dart';
+import 'package:mydaily/themes/dark_theme.dart';
+import 'package:mydaily/themes/light_theme.dart';
 
 void main() async {
   // init hive

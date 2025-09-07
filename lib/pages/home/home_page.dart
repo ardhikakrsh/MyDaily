@@ -7,8 +7,10 @@ import 'package:mydaily/components/home/header.dart';
 import 'package:mydaily/helpers/emoticon_helper.dart';
 import 'package:mydaily/models/mood_entry.dart';
 import 'package:mydaily/pages/mood/mood_page.dart';
+import 'package:mydaily/themes/app_colors.dart';
 import 'package:mydaily/widgets/dark_secondary_background.dart';
 import 'package:mydaily/widgets/main_icon_button.dart';
+import 'package:mydaily/widgets/my_searchbar.dart';
 import 'package:mydaily/widgets/secondary_background.dart';
 
 class HomePage extends StatefulWidget {
@@ -38,25 +40,11 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(height: 30),
 
                   // Search bar
-                  TextField(
-                    decoration: InputDecoration(
-                      filled: true,
-                      // fillColor: Color(0xFFFADDE7).withOpacity(0.4),
-                      fillColor: isDarkMode
-                          ? Colors.black.withOpacity(0.2)
-                          : Colors.white.withOpacity(0.4),
-                      hintText: 'Search...',
-                      prefixIcon: Icon(
-                        Icons.search,
-                        color: isDarkMode ? Colors.white54 : Colors.black54,
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
+                  MySearchBar(
+                    fillColor: isDarkMode
+                        ? AppColors.black02.withOpacity(0.4)
+                        : AppColors.white.withOpacity(0.4),
                   ),
-
                   SizedBox(height: 20),
 
                   // Emoji section
